@@ -105,7 +105,7 @@ export function ProblemDemo() {
 /** Sections 3, 5, 6: interactive bend / beta playground. */
 export function Playground() {
   const [target, setTarget] = useState(1);
-  const [bendAmt, setBendAmt] = useState(-0.15);
+  const [bendAmt, setBendAmt] = useState(0.06);
   const [beta, setBeta] = useState(6);
   const tau = useTau();
   const a = START, b = GOALS[target];

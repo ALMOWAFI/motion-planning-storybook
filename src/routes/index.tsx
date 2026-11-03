@@ -71,7 +71,7 @@ function Index() {
           <Formula>{`baseline:  p(s) = start + s·(goal − start)
 legible:   p(s) = start + s·(goal − start) + bend·sin(πs)`}</Formula>
           <Playground />
-          <p className="text-sm text-muted-foreground">Tip: bend <em>away</em> from the distractor cubes. Cube positions are illustrative, not the real experiment.yaml layout.</p>
+          <p className="text-sm text-muted-foreground">Tip: the score rises when the bend leans away from the cubes it could be confused with — but bending too far points at another cube instead. Cube positions are illustrative, not the real experiment.yaml layout.</p>
         </Section>
 
         <Section id="timing" n="3" title="Identical timing: minimum jerk">
