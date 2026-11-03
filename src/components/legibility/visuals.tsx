@@ -10,13 +10,16 @@ import {
   type Vec,
 } from "@/lib/legibility";
 
-// Illustrative layout (top-down, metres). Swap for experiment.yaml values.
+// Real UR5e layout from config/experiment.yaml (arm_base_link frame), recentred on the
+// start pose and expressed as [lateral, forward] metres: lateral = y_real − y_start,
+// forward = x_real − x_start. The arc (0.45 m radius around start) means edge cubes
+// are slightly nearer than middle ones — that curvature is real, not stylised.
 export const START: Vec = [0, 0];
 export const GOALS: Vec[] = [
-  [-0.3, 0.5],
-  [-0.1, 0.5],
-  [0.1, 0.5],
-  [0.3, 0.5],
+  [-0.256, 0.37], // B1 orange
+  [-0.09, 0.441], // B2 red
+  [0.09, 0.441], // B3 yellow
+  [0.256, 0.37], // B4 green
 ];
 export const CUBES = [
   { name: "orange", fill: "fill-cube-orange", bg: "bg-cube-orange" },
@@ -84,7 +87,7 @@ export function ProblemDemo() {
   const target = 1;
   const pts = useMemo(() => samplePath((s) => legiblePoint(START, GOALS[target], [0, 0], s)), []);
   const p = legiblePoint(START, GOALS[target], [0, 0], minJerk(tau));
-  const probs = goalPosterior(p, START, GOALS, 6);
+  const probs = goalPosterior(p, START, GOALS, 4);
   return (
     <div className="grid gap-6 md:grid-cols-[3fr_2fr] md:items-center">
       <Table>
@@ -105,8 +108,8 @@ export function ProblemDemo() {
 /** Sections 3, 5, 6: interactive bend / beta playground. */
 export function Playground() {
   const [target, setTarget] = useState(1);
-  const [bendAmt, setBendAmt] = useState(0.06);
-  const [beta, setBeta] = useState(6);
+  const [bendAmt, setBendAmt] = useState(0.2); // real "legible" condition bend, experiment.yaml
+  const [beta, setBeta] = useState(4); // optimizer default, legibility_optimizer.py
   const tau = useTau();
   const a = START, b = GOALS[target];
   const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
