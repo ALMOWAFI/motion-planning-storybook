@@ -45,7 +45,7 @@ export function legibilityScore(xyz: Vec[], goals: Vec[], target: number, beta =
   let den = 0;
   for (let i = 0; i < n; i++) {
     const w = (n - i) / n; // (T - t_i) / T, uniform dt
-    num += goalPosterior(xyz[i], xyz[0], goals, beta)[target] * w;
+    num += (goalPosterior(xyz[i]!, xyz[0]!, goals, beta)[target] ?? 0) * w;
     den += w;
   }
   return num / den;
