@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
 
 const NAV = [
   ["problem", "Problem"], ["paths", "Paths"], ["timing", "Timing"], ["inference", "Inference"],
-  ["optimizer", "Optimizer"], ["robot", "Robot"], ["safety", "Safety"],
+  ["optimizer", "Optimizer"], ["robot", "Robot"], ["lab", "Lab"], ["safety", "Safety"],
 ];
 
 function Formula({ children }: { children: React.ReactNode }) {
@@ -113,7 +113,28 @@ s.t. Σ‖Δq‖²/Δt ≤ cost_ratio · baseline_cost
           <Pipeline />
         </Section>
 
-        <Section id="safety" n="7" title="Safety & experiment notes">
+        <Section id="lab" n="7" title="Ran this for real">
+          <p className="max-w-2xl text-muted-foreground">
+            A pilot session on the actual UR5e: the arm, the participant's "which cube?" display
+            cycling through trial rounds, and the operator's terminal.
+          </p>
+          <video
+            controls
+            preload="metadata"
+            className="w-full max-w-sm rounded-sm border border-border"
+            src="/pilot-session.mp4"
+          >
+            Your browser doesn't support embedded video.
+          </video>
+          <p className="max-w-2xl text-sm text-muted-foreground">
+            This is a handheld walkthrough clip, not a fixed camera on one clean reach — so unlike
+            the panels above, nothing here is synced frame-by-frame to the optimizer's output.
+            It's included as evidence the pipeline runs end to end on real hardware with a real
+            participant, not a claim about what the model predicted at any instant in this clip.
+          </p>
+        </Section>
+
+        <Section id="safety" n="8" title="Safety & experiment notes">
           <ul className="grid gap-3 md:grid-cols-2">
             {[
               "Every trajectory passes workspace, speed and joint-jump checks before it is shown or sent.",
